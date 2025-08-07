@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ortiqboy va Ko'pkari Orzusi</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+        
+        * {
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 20%, #334155 40%, #475569 60%, #64748b 80%, #94a3b8 100%);
+            background-size: 400% 400%;
+            animation: gradientShift 20s ease infinite;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+        }
+        
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        .village-pattern {
+            background: transparent;
+        }
+        
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+        }
+        
+        @media (max-width: 768px) {
+            .card-hover:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+            }
+        }
+        
+        .emoji-float {
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .nav-link {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .nav-link::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: -100%;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, #60a5fa, #3b82f6);
+            transition: left 0.3s ease;
+        }
+        
+        .nav-link:hover::before {
+            left: 0;
+        }
+        
+        /* Responsive Typography */
+        @media (max-width: 640px) {
+            .text-7xl { font-size: 3rem; }
+            .text-5xl { font-size: 2.5rem; }
+            .text-4xl { font-size: 2rem; }
+            .text-3xl { font-size: 1.5rem; }
+            .text-2xl { font-size: 1.25rem; }
+            .text-xl { font-size: 1.1rem; }
+        }
+        
+        /* Mobile Navigation */
+        @media (max-width: 768px) {
+            .mobile-nav-item {
+                padding: 0.75rem 1rem;
+                border-bottom: 1px solid rgba(255,255,255,0.1);
+            }
+        }
+        
+        /* Responsive Grid */
+        @media (max-width: 768px) {
+            .responsive-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+        }
+        
+        /* Professional shadows */
+        .professional-shadow {
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+        
+        .professional-shadow-lg {
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        
+        /* Smooth scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        /* Better mobile touch targets */
+        @media (max-width: 768px) {
+            .touch-target {
+                min-height: 44px;
+                min-width: 44px;
+            }
+        }
+    </style>
+</head>
+<body class="village-pattern">
+
+
+    <!-- Navigation -->
+    <nav class="bg-gradient-to-r from-slate-900 via-blue-900 to-indigo-900 professional-shadow-lg sticky top-0 z-50 backdrop-blur-sm bg-opacity-95 border-b border-slate-700">
+        <div class="container mx-auto px-4 sm:px-6 py-3 sm:py-4">
+            <div class="flex justify-between items-center">
+                <div class="text-white text-xl sm:text-2xl font-bold">
+                    🐎 Ortiqboy 🏇
+                </div>
+                <div class="hidden lg:flex space-x-6 xl:space-x-8">
+                    <a href="#home" class="nav-link text-white hover:text-blue-300 px-3 py-2 transition-colors touch-target">🏠 Bosh sahifa</a>
+                    <a href="#kopkari" class="nav-link text-white hover:text-blue-300 px-3 py-2 transition-colors touch-target">🏇 Ko'pkari haqida</a>
+                    <a href="#horse" class="nav-link text-white hover:text-blue-300 px-3 py-2 transition-colors touch-target">🐴 Ot - do'st</a>
+                    <a href="#story" class="nav-link text-white hover:text-blue-300 px-3 py-2 transition-colors touch-target">📖 Mening hikoyam</a>
+                    <a href="#future" class="nav-link text-white hover:text-blue-300 px-3 py-2 transition-colors touch-target">🌟 Kelajak</a>
+                </div>
+                <div class="lg:hidden">
+                    <button id="mobile-menu-btn" class="text-white touch-target p-2">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+            <div id="mobile-menu" class="hidden lg:hidden mt-4">
+                <div class="bg-slate-800 rounded-lg overflow-hidden border border-slate-600">
+                    <a href="#home" class="mobile-nav-item block text-white hover:text-blue-300 hover:bg-slate-700 transition-colors">🏠 Bosh sahifa</a>
+                    <a href="#kopkari" class="mobile-nav-item block text-white hover:text-blue-300 hover:bg-slate-700 transition-colors">🏇 Ko'pkari haqida</a>
+                    <a href="#horse" class="mobile-nav-item block text-white hover:text-blue-300 hover:bg-slate-700 transition-colors">🐴 Ot - do'st</a>
+                    <a href="#story" class="mobile-nav-item block text-white hover:text-blue-300 hover:bg-slate-700 transition-colors">📖 Mening hikoyam</a>
+                    <a href="#future" class="mobile-nav-item block text-white hover:text-blue-300 hover:bg-slate-700 transition-colors">🌟 Kelajak</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="min-h-screen flex items-center justify-center px-4 sm:px-6 py-12">
+        <div class="text-center max-w-4xl mx-auto">
+            <div class="mb-6 sm:mb-8">
+                <span class="text-6xl sm:text-7xl md:text-8xl emoji-float inline-block">🐎</span>
+                <span class="text-6xl sm:text-7xl md:text-8xl emoji-float inline-block" style="animation-delay: 0.5s">🏇</span>
+                <span class="text-6xl sm:text-7xl md:text-8xl emoji-float inline-block" style="animation-delay: 1s">🏆</span>
+            </div>
+            <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-gray-800 mb-4 sm:mb-6 leading-tight">
+                Ortiqboy va Ko'pkari Orzusi
+            </h1>
+            <p class="text-lg sm:text-xl md:text-2xl text-gray-700 mb-6 sm:mb-8 leading-relaxed px-4">
+                🌟 Ot – sadoqat, Ko'pkari – g'urur 🌟
+            </p>
+            <div class="flex flex-wrap justify-center gap-3 sm:gap-4 text-3xl sm:text-4xl">
+                <span class="emoji-float">🏔️</span>
+                <span class="emoji-float" style="animation-delay: 0.1s">🌾</span>
+                <span class="emoji-float" style="animation-delay: 0.2s">🏘️</span>
+                <span class="emoji-float" style="animation-delay: 0.3s">🌅</span>
+                <span class="emoji-float" style="animation-delay: 0.4s">🦅</span>
+                <span class="emoji-float" style="animation-delay: 0.5s">💪</span>
+                <span class="emoji-float" style="animation-delay: 0.6s">🏃‍♂️</span>
+                <span class="emoji-float" style="animation-delay: 0.7s">🌿</span>
+                <span class="emoji-float" style="animation-delay: 0.8s">⛰️</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Ko'pkari Section -->
+    <section id="kopkari" class="py-12 sm:py-16 lg:py-20 px-4 sm:px-6">
+        <div class="container mx-auto max-w-6xl">
+            <div class="text-center mb-12 sm:mb-16">
+                <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-800 mb-4 sm:mb-6">
+                    🏇 Ko'pkari - Xalq Ruhi 🏇
+                </h2>
+                <div class="flex justify-center gap-3 sm:gap-4 text-2xl sm:text-3xl mb-6 sm:mb-8">
+                    <span class="emoji-float">🇺🇿</span>
+                    <span class="emoji-float" style="animation-delay: 0.2s">🇰🇿</span>
+                    <span class="emoji-float" style="animation-delay: 0.4s">🇹🇯</span>
+                    <span class="emoji-float" style="animation-delay: 0.6s">🇦🇫</span>
+                    <span class="emoji-float" style="animation-delay: 0.8s">🏇</span>
+                    <span class="emoji-float" style="animation-delay: 1.0s">🐎</span>
+                    <span class="emoji-float" style="animation-delay: 1.2s">🏆</span>
+                </div>
+            </div>
+            
+            <div class="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center responsive-grid">
+                <div class="card-hover bg-gradient-to-br from-cyan-100 via-blue-100 to-purple-100 professional-shadow-lg rounded-2xl p-6 sm:p-8 border-2 border-cyan-200">
+                    <h3 class="text-xl sm:text-2xl font-bold text-purple-800 mb-3 sm:mb-4">
+                        🎯 O'yinning Mohiyati
+                    </h3>
+                    <p class="text-gray-700 leading-relaxed mb-3 sm:mb-4 text-sm sm:text-base">
+                        Ko'pkari – Markaziy Osiyoda, xususan O'zbekiston, Qozog'iston, Tojikiston va Afg'onistonda keng tarqalgan qadimiy milliy o'yin hisoblanadi. 🌍 🏔️ 🌾 ⭐
+                    </p>
+                    <p class="text-gray-700 leading-relaxed text-sm sm:text-base">
+                        U xalqimizning jasorati, epchiligi, sadoqati va jamoaviy ruhini aks ettiradi. 💪 ⚔️ ❤️ 🤝 Chavandozlar ot ustida uloq deb ataluvchi belgi ustida kurash olib boradilar. 🥅 🏇 🎯
+                    </p>
+                </div>
+                
+                <div class="card-hover bg-gradient-to-br from-pink-100 via-rose-100 to-orange-100 professional-shadow-lg rounded-2xl p-6 sm:p-8 border-2 border-pink-200">
+                    <h3 class="text-xl sm:text-2xl font-bold text-rose-800 mb-3 sm:mb-4">
+                        🌟 Hayot Sabog'i va Vatanparvarlik
+                    </h3>
+                    <p class="text-gray-800 leading-relaxed text-base sm:text-lg mb-3 sm:mb-4">
+                        Bu o'yin sportdan ko'ra ko'proq hayot sabog'i, vatanparvarlik va o'zlik ifodasidir. 🇺🇿 Ko'pkari xalq ruhi mujassam bo'lgan milliy sport hisoblanadi.
+                    </p>
+                    <div class="space-y-3 sm:space-y-4">
+                        <div class="flex items-start gap-3">
+                            <span class="text-xl sm:text-2xl">🌸</span>
+                            <div>
+                                <span class="text-gray-800 font-semibold text-sm sm:text-base">Bahor va yoz oylarida</span>
+                                <p class="text-gray-700 text-xs sm:text-sm">To'ylar va katta xalq bayramlari munosabati bilan</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <span class="text-xl sm:text-2xl">❄️</span>
+                            <div>
+                                <span class="text-gray-800 font-semibold text-sm sm:text-base">Qishda ham o'tkaziladi</span>
+                                <p class="text-gray-700 text-xs sm:text-sm">Chinakam ishqibozlar sovuqda ham tomosha qiladi</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-3">
+                            <span class="text-xl sm:text-2xl">🏆</span>
+                            <div>
+                                <span class="text-gray-800 font-semibold text-sm sm:text-base">Jasorat va mahorat</span>
+                                <p class="text-gray-700 text-xs sm:text-sm">Chaqqonlik va tajriba talab qiladi</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Information Section -->
+    <section class="py-12 sm:py-16 lg:py-20 px-4 sm:px-6 bg-gradient-to-br from-emerald-200 via-teal-200 to-cyan-200">
+        <div class="container mx-auto max-w-4xl">
+            <div class="card-hover bg-gradient-to-br from-white via-emerald-50 to-teal-50 professional-shadow-lg rounded-2xl p-6 sm:p-8 border-2 border-emerald-300">
+                <div class="flex items-center gap-3 sm:gap-4 mb-4 sm:mb-6">
+                    <span class="text-2xl sm:text-3xl">📌</span>
+                    <h3 class="text-xl sm:text-2xl font-bold text-amber-800">Muhim Ma'lumot</h3>
+                </div>
+                <div class="space-y-4 sm:space-y-6">
+                    <p class="text-gray-800 leading-relaxed text-sm sm:text-base">
+                        Ushbu sahifadagi ma'lumotlar bloger, jurnalist va IT mutaxassisi tomonidan Ortiqboy bilan o'tkazilgan jonli suhbat asosida yozib olingan. 📝 Unda keltirilgan barcha ma'lumotlar bevosita Ortiqboyning shaxsiy fikrlari va tajribalariga asoslangan.
+                    </p>
+                    <p class="text-gray-800 leading-relaxed text-sm sm:text-base">
+                        Agar uning hayotini to'liq yozadigan bo'lsak, bu alohida doston bo'lardi. 📚 Shu sababli bu yerda faqat muhim voqealar va xotiralarga qisqacha to'xtalib o'tildi.
+                    </p>
+                    <div class="bg-amber-100 rounded-lg p-4 sm:p-6 border-l-4 border-amber-500">
+                        <p class="text-gray-800 leading-relaxed text-sm sm:text-base">
+                            Ko'pkari — o'zbek xalqining qadimiy, milliy va jasoratli sport turi bo'lib, asosan qishloq va tog'li hududlarda keng tarqalgan. 🏔️ Ko'pkari nafaqat kuch va epchillik, balki strategik fikrlashni ham talab qiladi.
+                        </p>
+                        <p class="text-gray-800 leading-relaxed text-sm sm:text-base mt-3 sm:mt-4">
+                            O'zbekiston bu sport turi bo'yicha Markaziy Osiyodagi eng faol hududlardan biridir va maydonlari, otchilari bilan kuchli o'ntalikka kiradi. 🇺🇿 Xususan, Surxondaryo, Qashqadaryo, Jizzax, va Navoiy viloyatlarida yirik ko'pkari musobaqalari o'tkaziladi.
+                        </p>
+                        <p class="text-gray-800 leading-relaxed text-sm sm:text-base mt-3 sm:mt-4">
+                            Ortiqboy ham o'z viloyatidagi mashhur ko'pkari hududlariga qatnab, o'sha yerda tajriba orttirgan. Jumladan, u Zominda o'tkazilgan katta ko'pkari musobaqasida qatnashib, u yerdagi otboqarlar, chavandozlar bilan tajriba almashgan. 🤝 Bu esa unga kelajakda o'z otini tayyorlashda amaliy bilim va ishonch bergan.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Horse Section -->
+    <section id="horse" class="py-12 sm:py-16 lg:py-20 px-4 sm:px-6">
+        <div class="container mx-auto max-w-6xl">
+            <div class="text-center mb-12 sm:mb-16">
+                <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-800 mb-4 sm:mb-6">
+                    🐴 Ot - Inson Do'sti, Milliy Faxr 🐴
+                </h2>
+                <div class="flex justify-center gap-3 sm:gap-4 text-2xl sm:text-3xl">
+                    <span class="emoji-float">❤️</span>
+                    <span class="emoji-float" style="animation-delay: 0.2s">🤝</span>
+                    <span class="emoji-float" style="animation-delay: 0.4s">👑</span>
+                    <span class="emoji-float" style="animation-delay: 0.6s">💎</span>
+                </div>
+            </div>
+            
+            <div class="grid lg:grid-cols-2 gap-6 sm:gap-8 lg:gap-12 mb-8 sm:mb-12 responsive-grid">
+                <div class="card-hover bg-gradient-to-br from-violet-100 via-purple-100 to-fuchsia-100 professional-shadow-lg rounded-2xl p-6 sm:p-8 border-2 border-violet-200">
+                    <h3 class="text-xl sm:text-2xl font-bold text-violet-800 mb-3 sm:mb-4">
+                        🐎 Ot - Eng Yaqin Do'st
+                    </h3>
+                    <p class="text-gray-800 leading-relaxed text-base sm:text-lg mb-3 sm:mb-4">
+                        Ot qadimdan turkiy xalqlarning eng yaqin do'sti, hayot yo'ldoshi bo'lib kelgan. 🤝 O'zbek xalq og'zaki ijodida ot sadoqat, mardlik, boylik va or-nomus ramzi sifatida tilga olinadi.
+                    </p>
+                    <div class="space-y-2 sm:space-y-3">
+                        <div class="flex items-center gap-3">
+                            <span class="text-xl sm:text-2xl">🛡️</span>
+                            <span class="text-gray-800 font-semibold text-sm sm:text-base">Sadoqat va ishonch</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <span class="text-xl sm:text-2xl">⚔️</span>
+                            <span class="text-gray-800 font-semibold text-sm sm:text-base">Mardlik va jasorat</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <span class="text-xl sm:text-2xl">👑</span>
+                            <span class="text-gray-800 font-semibold text-sm sm:text-base">Or-nomus va g'urur</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card-hover bg-gradient-to-br from-yellow-100 via-orange-100 to-red-100 professional-shadow-lg rounded-2xl p-6 sm:p-8 border-2 border-yellow-200">
+                    <h3 class="text-xl sm:text-2xl font-bold text-orange-800 mb-3 sm:mb-4">
+                        🎯 Ko'pkari Uchun Ot Tanlash
+                    </h3>
+                    <p class="text-gray-800 leading-relaxed text-base sm:text-lg mb-3 sm:mb-4">
+                        Otning salomatligi, parvarishi, uni o'rgatish jarayoni har bir otboqarning sabri, mehribonligi va mahoratidan dalolat beradi. 💪
+                    </p>
+                    <p class="text-gray-800 leading-relaxed text-base sm:text-lg">
+                        Ayniqsa, ko'pkari uchun ot tanlash – bu ilm, san'at va hissiyot uyg'unligi bo'lgan murakkab jarayondir. 🎨 Bu jarayon katta tajriba va bilim talab qiladi.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Story Section -->
+    <section id="story" class="py-12 sm:py-16 lg:py-20 px-4 sm:px-6">
+        <div class="container mx-auto max-w-4xl">
+            <div class="text-center mb-12 sm:mb-16">
+                <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-800 mb-4 sm:mb-6">
+                    📖 Ortiqboy va Otga Bo'lgan Mehr 📖
+                </h2>
+                <div class="flex justify-center gap-3 sm:gap-4 text-2xl sm:text-3xl">
+                    <span class="emoji-float">🌱</span>
+                    <span class="emoji-float" style="animation-delay: 0.3s">📅</span>
+                    <span class="emoji-float" style="animation-delay: 0.6s">💝</span>
+                </div>
+            </div>
+            
+            <div class="space-y-6 sm:space-y-8">
+                <div class="card-hover bg-gradient-to-br from-green-100 via-emerald-100 to-teal-100 rounded-2xl p-6 sm:p-8 professional-shadow-lg border-2 border-green-200">
+                    <div class="flex items-center gap-3 sm:gap-4 mb-3 sm:mb-4">
+                        <span class="text-2xl sm:text-3xl">👨‍🌾</span>
+                        <h3 class="text-lg sm:text-xl lg:text-2xl font-bold text-green-800">Ortiqboy – mehnatsevar yigit</h3>
+                    </div>
+                    <p class="text-gray-800 leading-relaxed text-sm sm:text-base lg:text-lg mb-3 sm:mb-4">
+                        Ortiqboy 2001-yilda tug'ilgan. U O'zbekistonning mehnatkash va qadriyatlarga boy qishloqlaridan birida voyaga yetgan. 🏘️ Bolaligidan u o'z hayotini mehnat, sadoqat va orzu bilan bog'lagan.
+                    </p>
+                    <p class="text-gray-800 leading-relaxed text-sm sm:text-base lg:text-lg">
+                        Uning hayot yo'li – bu bir tomondan har kuni bajariladigan og'ir yumushlar, ikkinchi tomondan esa yuksak maqsadlar, o'z ustida ishlash va kelajakka dadil qadam qo'yishdir. 💪
+                    </p>
+                </div>
+                
+                <div class="card-hover bg-white rounded-2xl p-6 sm:p-8 professional-shadow-lg border border-gray-200">
+                    <div class="flex items-start gap-3 sm:gap-4 mb-3 sm:mb-4">
+                        <span class="text-2xl sm:text-3xl">📚</span>
+                        <h3 class="text-lg sm:text-xl lg:text-2xl font-bold text-amber-800">Maktab va kollej yillari – bilim sari qat'iyatli yo'l</h3>
+                    </div>
+                    <p class="text-gray-800 leading-relaxed text-sm sm:text-base lg:text-lg mb-3 sm:mb-4">
+                        Ortiqboy maktabni muvaffaqiyatli tamomlagan va 2018–2019-yillarda ikki yillik kollejni ham bitirgan. 🎓 Aytish kerakki, u kollejni maktab bilan bir vaqtning o'zida o'qigan.
+                    </p>
+                    <p class="text-gray-800 leading-relaxed text-sm sm:text-base lg:text-lg mb-3 sm:mb-4">
+                        Bu ikki tomonlama mas'uliyat talab qiladigan davrda ham u hech qachon saboqdan chetda qolmagan. Har shanba kuni 5–8 kilometr yo'l bosib, kollejga qatnagan, har kuni darslarga jiddiy yondashgan. 🚶‍♂️
+                    </p>
+                    <p class="text-gray-800 leading-relaxed text-sm sm:text-base lg:text-lg">
+                        U o'qishga juda qiziqqan, ayniqsa ona tilidagi matnlarni juda tez va aniq o'qiy olgan. Sinfdoshlari orasida "eng tez o'qiydigan o'quvchi" sifatida nom chiqargan. 📖 Bilimga chanqoqligi uni har doim boshqalardan ajratib turgan.
+                    </p>
+                </div>
+                
+                <div class="card-hover bg-white rounded-2xl p-6 sm:p-8 professional-shadow-lg border border-gray-200">
+                    <div class="flex items-start gap-3 sm:gap-4 mb-3 sm:mb-4">
+                        <span class="text-2xl sm:text-3xl">🍇</span>
+                        <h3 class="text-lg sm:text-xl lg:text-2xl font-bold text-amber-800">Qishloq mehnati – ota meros, halol hayot maktabi</h3>
+                    </div>
+                    <p class="text-gray-800 leading-relaxed text-sm sm:text-base lg:text-lg mb-3 sm:mb-4">
+                        Ortiqboyning oilasi avloddan-avlodga uzumchilik bilan shug'ullanib keladi. Bu kasb unga otasidan meros bo'lib o'tgan. 👨‍👦 Qishloqdagi tokzorlar, har bir uzum tutami – bu oila mehnati, sabri va fidoyiligidan dalolat beradi.
+                    </p>
+                    <p class="text-gray-800 leading-relaxed text-sm sm:text-base lg:text-lg mb-3 sm:mb-4">
+                        Ortiqboy yoshligidanoq uzum parvarishi, tok ekish, terim mavsumida ishtirok etish, tokni ariq suvi bilan sug'orish kabi barcha ishlarni puxta o'zlashtirgan. 🌱
+                    </p>
+                    <p class="text-gray-800 leading-relaxed text-sm sm:text-base lg:text-lg">
+                        Qishloqda har kuni biror yumush chiqadi. Ayniqsa, chorvachilik va ot parvarishi oson ish emas. Ortiqboy buni yaxshi biladi. Uning hovlisida sigir, qo'y, echkilar bor, lekin u eng katta mehrini otiga bag'ishlaydi. 🐄🐑🐐
+                    </p>
+                </div>
+                
+                <div class="card-hover bg-white rounded-2xl p-6 sm:p-8 professional-shadow-lg border border-gray-200">
+                    <div class="flex items-start gap-3 sm:gap-4 mb-3 sm:mb-4">
+                        <span class="text-2xl sm:text-3xl">🐎</span>
+                        <h3 class="text-lg sm:text-xl lg:text-2xl font-bold text-amber-800">Otga mehr va ko'pkari orzusi</h3>
+                    </div>
+                    <p class="text-gray-800 leading-relaxed text-sm sm:text-base lg:text-lg mb-3 sm:mb-4">
+                        Ortiqboy ko'pkari o'yinlariga juda erta – 2016–2017 yillardan boshlab qiziqa boshlagan. U musobaqalarni jon deb tomosha qilgan, qor bo'ladimi, issiqmi – hech narsa uni to'xtata olmagan. 🏇 ❄️ ☀️
+                    </p>
+                    <p class="text-gray-800 leading-relaxed text-sm sm:text-base lg:text-lg mb-3 sm:mb-4">
+                        Yaqinda u o'z otini sotib oldi. Bu ot – oddiy hayvon emas, Ortiqboyning orzulari, umidi va kelajak rejalarining bir bo'lagi. 💝 ✨ 🌟 Uning otiga bo'lgan mehri judayam kuchli – u otini o'z farzandidek sevadi va parvarish qiladi.
+                    </p>
+                    <p class="text-gray-800 leading-relaxed text-sm sm:text-base lg:text-lg">
+                        Ot parvarishi og'ir mehnat talab qiladi: har kuni ovqatlantirish, tozalash, harakatga chiqarish, sog'lig'ini kuzatish... 🥕 🧽 🚶‍♂️ 🩺 Ammo Ortiqboy bu yumushlarni bajarayotganida charchamaydi, aksincha, ruhlanadi. U otni shunday tarbiyalashni istaydi-ki, ertaga xalq ko'z o'ngida ko'pkari maydonida g'urur bilan yugursin. 🏆 👥 🎉
+                    </p>
+                </div>
+                
+                <div class="card-hover bg-gradient-to-br from-rose-100 via-pink-100 to-red-100 rounded-2xl p-6 sm:p-8 professional-shadow-lg border-2 border-rose-200">
+                    <div class="flex items-start gap-3 sm:gap-4 mb-3 sm:mb-4">
+                        <span class="text-2xl sm:text-3xl">👨‍👩‍👦</span>
+                        <h3 class="text-lg sm:text-xl lg:text-2xl font-bold text-rose-800">Ota-onaga hurmat va oila sha'ni</h3>
+                    </div>
+                    <p class="text-gray-800 leading-relaxed text-sm sm:text-base lg:text-lg mb-3 sm:mb-4">
+                        Ortiqboy nafaqat otiga, balki ota-onasiga nisbatan ham judayam mehrli va hurmatli yigit. 👨‍👩‍👦 ❤️ O'zbek madaniyatida ota-ona hurmat-ehtiromining birinchi o'rinda turishi – bu milliy qadriyatlarimizning asosidir.
+                    </p>
+                    <p class="text-gray-800 leading-relaxed text-sm sm:text-base lg:text-lg mb-3 sm:mb-4">
+                        U har kuni ota-onasining duosini oladi, ularning maslahatlarini tinglab, oila sha'nini ko'tarish uchun mehnat qiladi. 🤲 👂 💪 Ortiqboyning har bir harakati, har bir orzusi ota-onasini faxrlantirish maqsadida amalga oshiriladi.
+                    </p>
+                    <div class="bg-rose-50 rounded-lg p-4 sm:p-6 border-l-4 border-rose-400">
+                        <p class="text-gray-800 leading-relaxed text-sm sm:text-base lg:text-lg italic">
+                            "Ota-onam mening eng qimmatli boyligim. Ularning duosi va rozi bo'lishi – mening eng katta muvaffaqiyatim. Ko'pkari maydonida g'alaba qozonishdan ham muhimi – ota-onamning ko'zlarida faxr ko'rishdir," – deydi Ortiqboy. 🏆 👥 ✨
+                        </p>
+                    </div>
+                    <p class="text-gray-800 leading-relaxed text-sm sm:text-base lg:text-lg mt-3 sm:mt-4">
+                        O'zbek madaniyatida oila sha'ni va ota-ona hurmat-ehtiromining bir-biridan ajralmas ekanligi Ortiqboyning hayot tarzida yaqqol namoyon bo'ladi. U o'z muvaffaqiyatlari orqali oilasining nomini ulug'lamoqchi. 🌟 🏛️ 👑
+                    </p>
+                </div>
+                
+                <div class="card-hover bg-gradient-to-br from-green-100 via-emerald-100 to-teal-100 rounded-2xl p-6 sm:p-8 professional-shadow-lg border-2 border-green-200">
+                    <div class="flex items-start gap-3 sm:gap-4 mb-3 sm:mb-4">
+                        <span class="text-2xl sm:text-3xl">🏃‍♂️</span>
+                        <h3 class="text-lg sm:text-xl lg:text-2xl font-bold text-green-800">Har kungi jismoniy mashqlar va tog' muhiti</h3>
+                    </div>
+                    <p class="text-gray-800 leading-relaxed text-sm sm:text-base lg:text-lg mb-3 sm:mb-4">
+                        Ortiqboy har kuni jismoniy mashqlar bilan shug'ullanadi. 💪 🌅 Erta tongda u tog'li hududlarda yuguradi, nafas olish mashqlarini bajaradi va tanasini ko'pkari uchun tayyorlaydi. 🏔️ 🌬️ 🫁
+                    </p>
+                    <p class="text-gray-800 leading-relaxed text-sm sm:text-base lg:text-lg mb-3 sm:mb-4">
+                        Tog' havosi va tabiat uni kuchliroq qiladi. 🌿 ⛰️ 🌲 U qiyalik yo'llarda yugurib, oyoq mushakalarini mustahkamlaydi, muvozanatini yaxshilaydi. Bu mashqlar unga ot ustida turish va harakat qilishda yordam beradi. 🦵 ⚖️ 🤸‍♂️
+                    </p>
+                    <p class="text-gray-800 leading-relaxed text-sm sm:text-base lg:text-lg">
+                        Har kuni 5 kilometr piyoda yuradi va 3 kilometr yuguradi. 🚶‍♂️ 🏃‍♂️ 📏 Bu kundalik mashqlar uning chidamliligini oshiradi va ko'pkari paytida uzoq vaqt ot ustida turish imkonini beradi. Chorva va otga qarash ham jismoniy kuch talab qiladi, shuning uchun u har kuni faol bo'ladi. Tog'lar orasida mashq qilish unga kuch va g'ayrat bag'ishlaydi! 💯 🔥 ⚡
+                    </p>
+                </div>
+                
+                <div class="card-hover bg-gradient-to-br from-amber-50 to-orange-50 rounded-2xl p-6 sm:p-8 professional-shadow-lg border border-amber-200">
+                    <div class="flex items-start gap-3 sm:gap-4 mb-3 sm:mb-4">
+                        <span class="text-2xl sm:text-3xl">🌟</span>
+                        <h3 class="text-lg sm:text-xl lg:text-2xl font-bold text-amber-800">Kelajak sari qadam</h3>
+                    </div>
+                    <p class="text-gray-800 leading-relaxed text-sm sm:text-base lg:text-lg mb-3 sm:mb-4">
+                        Ortiqboy kelajagida mashhur ko'pkarichi bo'lishni, otini elga tanitishni, va o'z qishlog'ini faxrlantirishni maqsad qilgan. Uning orzusi oddiy emas – bu halol mehnat, sabr, iymon va orzu bilan sug'orilgan maqsaddir. 🎯
+                    </p>
+                    <blockquote class="text-sm sm:text-base lg:text-lg text-gray-800 italic border-l-4 border-amber-500 pl-3 sm:pl-4 mb-3 sm:mb-4">
+                        "Men o'z otimni ko'pkari uchun tayyorlayapman. Uning yugurganini xalq ko'rsin. Mening mehnatim faqat men uchun emas – bu ota merosim, xalq urfimiz va kelajagim uchun," – deydi Ortiqboy.
+                    </blockquote>
+                    <p class="text-gray-800 leading-relaxed text-sm sm:text-base lg:text-lg">
+                        U bugun har tong erta turadi, tokzorlariga qaraydi, otini boqadi, chorvasiga ozuqa beradi. Kechga yaqin esa orzulari haqida o'ylaydi. Chunki mehnat – bu unga ota-onasidan meros, orzu esa uning o'z yuragidan. ❤️
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Future Section -->
+    <section id="future" class="py-12 sm:py-16 lg:py-20 px-4 sm:px-6">
+        <div class="container mx-auto max-w-4xl">
+            <div class="text-center mb-12 sm:mb-16">
+                <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-800 mb-4 sm:mb-6">
+                    🌟 Kelajak Sari Qarash 🌟
+                </h2>
+                <div class="flex justify-center gap-3 sm:gap-4 text-2xl sm:text-3xl">
+                    <span class="emoji-float">🎯</span>
+                    <span class="emoji-float" style="animation-delay: 0.2s">🏆</span>
+                    <span class="emoji-float" style="animation-delay: 0.4s">⭐</span>
+                    <span class="emoji-float" style="animation-delay: 0.6s">🚀</span>
+                </div>
+            </div>
+            
+            <div class="card-hover bg-white professional-shadow-lg rounded-2xl p-6 sm:p-8 mb-6 sm:mb-8">
+                <div class="text-center mb-4 sm:mb-6">
+                    <span class="text-4xl sm:text-5xl lg:text-6xl">💭</span>
+                </div>
+                <blockquote class="text-base sm:text-lg lg:text-xl text-gray-800 italic text-center leading-relaxed mb-3 sm:mb-4">
+                    "Men istayman otim bilan birgalikda xalq ko'z o'ngida ko'pkari maydoniga chiqib, g'urur bilan kurashay. Mening otim – mening orzularimning bir bo'lagi."
+                </blockquote>
+                <p class="text-sm sm:text-base lg:text-lg text-gray-800 text-center leading-relaxed">
+                    Bu orzu uni har kuni kuchliroq, sabrliroq va g'ayratliroq qilib boradi. 💪 U biladiki, bu yo'l oson emas. Lekin mehnat, sadoqat va ishonch bor joyda muvaffaqiyat bo'ladi.
+                </p>
+                <div class="text-center mt-4 sm:mt-6">
+                    <span class="text-base sm:text-lg font-bold text-amber-800">- Ortiqboy</span>
+                </div>
+            </div>
+            
+            <div class="card-hover bg-white professional-shadow-lg rounded-2xl p-6 sm:p-8 mb-6 sm:mb-8">
+                <h3 class="text-lg sm:text-xl lg:text-2xl font-bold text-amber-800 mb-3 sm:mb-4 text-center">
+                    🏆 Ortiqboyning Hikoyasi - Timsal
+                </h3>
+                <p class="text-gray-800 leading-relaxed text-sm sm:text-base lg:text-lg text-center">
+                    Ortiqboyning hikoyasi – ot va inson o'rtasidagi muhabbat, ko'pkariga bo'lgan sadoqat va milliy qadriyatlarga bo'lgan hurmat timsolidir. 🇺🇿 Bu yo'lda u tajribali otboqarlar, chavandozlar bilan maslahatlashmoqda, ularning bilim va ko'nikmalaridan o'rganmoqda.
+                </p>
+            </div>
+            
+            <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 responsive-grid">
+                <div class="card-hover bg-white professional-shadow-lg rounded-2xl p-4 sm:p-6 text-center">
+                    <div class="text-2xl sm:text-3xl mb-2 sm:mb-3">💪</div>
+                    <h3 class="font-bold text-amber-800 mb-1 sm:mb-2 text-sm sm:text-base">Kuchli</h3>
+                    <p class="text-gray-800 text-xs sm:text-sm">Har kuni yanada kuchliroq bo'lish</p>
+                </div>
+                
+                <div class="card-hover bg-white professional-shadow-lg rounded-2xl p-4 sm:p-6 text-center">
+                    <div class="text-2xl sm:text-3xl mb-2 sm:mb-3">⏰</div>
+                    <h3 class="font-bold text-amber-800 mb-1 sm:mb-2 text-sm sm:text-base">Sabrli</h3>
+                    <p class="text-gray-800 text-xs sm:text-sm">Sabr va mehnat bilan muvaffaqiyat</p>
+                </div>
+                
+                <div class="card-hover bg-white professional-shadow-lg rounded-2xl p-4 sm:p-6 text-center sm:col-span-2 lg:col-span-1">
+                    <div class="text-2xl sm:text-3xl mb-2 sm:mb-3">🔥</div>
+                    <h3 class="font-bold text-amber-800 mb-1 sm:mb-2 text-sm sm:text-base">G'ayratliroq</h3>
+                    <p class="text-gray-800 text-xs sm:text-sm">Ishonch va g'ayrat bilan oldinga</p>
+                </div>
+            </div>
+            
+            <div class="text-center mt-8 sm:mt-12">
+                <p class="text-sm sm:text-base lg:text-lg text-gray-700 leading-relaxed">
+                    🌾 Bu yo'l oson emas, lekin mehnat, sadoqat va ishonch bor joyda muvaffaqiyat bo'ladi! 🌾
+                </p>
+                <div class="flex justify-center gap-3 sm:gap-4 text-xl sm:text-2xl mt-4 sm:mt-6">
+                    <span class="emoji-float">🏇</span>
+                    <span class="emoji-float" style="animation-delay: 0.3s">❤️</span>
+                    <span class="emoji-float" style="animation-delay: 0.6s">🇺🇿</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gradient-to-r from-slate-900 via-gray-900 to-slate-800 py-8 sm:py-10 lg:py-12 px-4 sm:px-6 border-t border-slate-700">
+        <div class="container mx-auto max-w-4xl text-center">
+            <div class="flex justify-center gap-4 sm:gap-6 text-3xl sm:text-4xl mb-4 sm:mb-6">
+                <span class="emoji-float">🐎</span>
+                <span class="emoji-float" style="animation-delay: 0.2s">🏇</span>
+                <span class="emoji-float" style="animation-delay: 0.4s">🏆</span>
+                <span class="emoji-float" style="animation-delay: 0.6s">⭐</span>
+            </div>
+            <h3 class="text-lg sm:text-xl lg:text-2xl font-bold text-white mb-3 sm:mb-4">
+                Ortiqboy - Ko'pkari Orzusi
+            </h3>
+            <p class="text-yellow-100 mb-4 sm:mb-6 text-sm sm:text-base leading-relaxed px-2">
+                🌟 Ot va inson o'rtasidagi muhabbat, ko'pkariga bo'lgan sadoqat va milliy qadriyatlarga bo'lgan hurmat timsoli 🌟
+            </p>
+            <div class="flex justify-center gap-3 sm:gap-4 text-xl sm:text-2xl mb-6 sm:mb-8">
+                <span>🏔️</span>
+                <span>🌾</span>
+                <span>🏘️</span>
+                <span>🌅</span>
+                <span>🦅</span>
+                <span>💪</span>
+                <span>🏃‍♂️</span>
+                <span>🌿</span>
+                <span>⛰️</span>
+                <span>🔥</span>
+            </div>
+            
+            <!-- Copyright and Legacy Section -->
+            <div class="border-t border-slate-600 pt-6 sm:pt-8">
+                <div class="bg-slate-800 bg-opacity-70 rounded-xl p-4 sm:p-6 mb-4 sm:mb-6 border border-slate-600">
+                    <h4 class="text-base sm:text-lg font-bold text-blue-200 mb-2 sm:mb-3">
+                        📜 Kelajak Avlodlar Uchun Meros 📜
+                    </h4>
+                    <p class="text-blue-100 text-xs sm:text-sm leading-relaxed">
+                        Bu sayt Ortiqboyning hayoti, orzulari va milliy qadriyatlarga bo'lgan muhabbatini aks ettiradi. 💝 Ushbu veb-sahifa kelajak avlodlar uchun meros sifatida qoldirilishi mumkin, shunda ular ham o'z ota-bobolarining g'oyalari va orzularidan ilhom olsinlar. 🌱✨
+                    </p>
+                </div>
+                
+                <div class="text-blue-200 text-xs sm:text-sm">
+                    <p class="mb-2">© 2025 - Ortiqboy va Ko'pkari Orzusi</p>
+                    <p class="flex items-center justify-center gap-2">
+                        <span>🏛️</span>
+                        <span>Milliy meros va qadriyatlar timsoli</span>
+                        <span>🏛️</span>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+        
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                    // Close mobile menu if open
+                    mobileMenu.classList.add('hidden');
+                }
+            });
+        });
+        
+        // Add scroll effect to navigation
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 100) {
+                nav.classList.add('bg-opacity-95');
+            } else {
+                nav.classList.remove('bg-opacity-95');
+            }
+        });
+        
+
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'96b4eab2c41b5190',t:'MTc1NDU1MDIzNC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
